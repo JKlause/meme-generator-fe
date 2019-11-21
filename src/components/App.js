@@ -15,7 +15,7 @@ import MemeContainer from '../containers/MemeContainer';
 const PrivateRoute = ({ ...rest }) => {
   const sessionId = useSelector(getSessionId);
   const loading = useSelector(getSessionLoading);
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
 
   useEffect(()=> {
     if(!sessionId) dispatch(sessionVerify());
@@ -23,7 +23,7 @@ const PrivateRoute = ({ ...rest }) => {
 
   if(loading) return <h1>Loading...</h1>;
 
-  if(!loading && !sessionId) return <Redirect to="/signin"/>;
+  if(!loading && !sessionId) return <Redirect to="/signup"/>;
 
   return <Route {...rest} />;
 };
@@ -33,8 +33,8 @@ export default function App() {
     <Router>
       <Switch>
         <PrivateRoute exact path="/" component={MemeContainer}/>
-        <PrivateRoute path="/signup" component={Signup}/>
-        <Route path="/signin" component={Signin}/>
+        <PrivateRoute path="/signin" component={Signin}/>
+        <Route path="/signup" component={Signup}/>
       </Switch>
     </Router>
   );

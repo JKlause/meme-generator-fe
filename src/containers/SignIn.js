@@ -3,7 +3,9 @@ import UserForm from '../components/user/UserForm';
 import { sessionSignin } from '../actions/sessionActions';
 
 const mapStateToProps = () => ({
-  buttonText: 'Sign In'
+  buttonText: 'Sign In',
+  redirectText: 'New User? Sign Up!',
+  redirectLink: '/signup'
 });
 
 const mapDispatchToProps = dispatch => ({

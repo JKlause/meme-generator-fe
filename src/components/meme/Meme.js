@@ -17,6 +17,6 @@ Meme.propTypes = {
     topText: PropTypes.string,
     bottomText: PropTypes.string,
     imageUrl: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired
+    id: PropTypes.string
   }).isRequired
 };
