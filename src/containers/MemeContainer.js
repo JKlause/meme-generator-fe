@@ -4,20 +4,19 @@ import { connect } from 'react-redux';
 import MemeForm from '../components/meme/MemeForm';
 import Memes from '../components/meme/Memes';
 import { getMemes } from '../selectors/memeSelectors';
-import { getSessionId } from '../selectors/sessionSelectors';
 import { createMeme, fetchUserMemes } from '../actions/memeActions';
 
 
 
-function MemeContainer({ memes, user, handleSubmit, loadMemes }) {
+function MemeContainer({ memes, handleSubmit, loadMemes }) {
   
   useEffect(()=> {
     loadMemes();
-  }, []);
+  }, [memes]);
 
   return (
     <>
-      <MemeForm user={user} handleSubmit={handleSubmit} />
+      <MemeForm handleSubmit={handleSubmit} />
       <Memes memes={memes} />
     </>
   );
@@ -25,14 +24,13 @@ function MemeContainer({ memes, user, handleSubmit, loadMemes }) {
 
 
 const mapStateToProps = state => ({
-  memes: getMemes(state),
-  user: getSessionId(state)
+  memes: getMemes(state)
 });
 
 const mapDispatchToProps = dispatch => ({
-  handleSubmit(event, topText, bottomText, imageUrl, user) {
+  handleSubmit(event, topText, bottomText, imageUrl) {
     event.preventDefault();
-    dispatch(createMeme(topText, bottomText, imageUrl, user));
+    dispatch(createMeme({ topText, bottomText, imageUrl }));
   },
   loadMemes() {
     dispatch(fetchUserMemes());
@@ -47,15 +45,13 @@ export default connect(
 
 MemeContainer.propTypes = {
   memes: PropTypes.arrayOf(PropTypes.shape({
-    topText: PropTypes.string.isRequired,
-    bottomText: PropTypes.string.isRequired,
+    topText: PropTypes.string,
+    bottomText: PropTypes.string,
     imageUrl: PropTypes.string.isRequired,
     _id: PropTypes.string.isRequired,
-    __v: PropTypes.string.isRequired
   })).isRequired,
   handleSubmit: PropTypes.func.isRequired,
   loadMemes: PropTypes.func.isRequired,
-  user: PropTypes.string.isRequired
 };
 
 

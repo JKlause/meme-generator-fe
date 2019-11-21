@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Meme from './Meme';
+import styles from './Memes.css';
 
 export default function Memes({ memes }) {
   const memeElements = memes.map(meme => {
@@ -10,25 +11,21 @@ export default function Memes({ memes }) {
       imageUrl: meme.imageUrl,
       id: meme._id
     };
-
-    <li key={meme._id}>
-      <Meme meme={memeData} />
-    </li>;  
+    return <Meme key={meme._id} meme={memeData} />;
   });
 
   return (
-    <ul>
+    <section className={styles.Memes}>
       {memeElements}
-    </ul>
+    </section>
   );
 }
 
 Memes.propTypes = {
   memes: PropTypes.arrayOf(PropTypes.shape({
-    topText: PropTypes.string.isRequired,
-    bottomText: PropTypes.string.isRequired,
+    topText: PropTypes.string,
+    bottomText: PropTypes.string,
     imageUrl: PropTypes.string.isRequired,
     _id: PropTypes.string.isRequired,
-    __v: PropTypes.string.isRequired
   })).isRequired
 };

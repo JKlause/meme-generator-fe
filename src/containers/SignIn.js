@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import UserForm from '../components/user/UserForm';
-import { sessionAction } from '../actions/sessionActions';
+import { sessionSignin } from '../actions/sessionActions';
 
 const mapStateToProps = () => ({
   buttonText: 'Sign In'
@@ -9,7 +9,7 @@ const mapStateToProps = () => ({
 const mapDispatchToProps = dispatch => ({
   handleSubmit(event, username, password) {
     event.preventDefault();
-    dispatch(sessionAction(username, password, 'signin'));
+    dispatch(sessionSignin(username, password));
   }
 });
 

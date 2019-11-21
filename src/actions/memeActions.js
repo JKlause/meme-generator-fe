@@ -1,8 +1,8 @@
-import { postMeme, fetchMemes } from '../services/meme';
+import { postMeme, getAllMemes } from '../services/meme';
 
 export const CREATE_MEME = 'CREATE_MEME';
-export const createMeme = (topText, bottomText, imageUrl, user) => dispatch => {
-  return postMeme(topText, bottomText, imageUrl, user)
+export const createMeme = meme => dispatch => {
+  postMeme(meme)
     .then(meme => {
       dispatch({
         type: CREATE_MEME,
@@ -11,12 +11,12 @@ export const createMeme = (topText, bottomText, imageUrl, user) => dispatch => {
     });
 };
 
-export const FETCH_USER_MEMES = 'FETCH_USER_MEMES';
+export const SET_MEMES = 'SET_MEMES';
 export const fetchUserMemes = () => dispatch => {
-  return fetchMemes()
+  getAllMemes()
     .then(memes => {
       dispatch({
-        type: FETCH_USER_MEMES,
+        type: SET_MEMES,
         payload: memes
       });
     });
