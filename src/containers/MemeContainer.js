@@ -5,10 +5,11 @@ import MemeForm from '../components/meme/MemeForm';
 import Memes from '../components/meme/Memes';
 import { getMemes } from '../selectors/memeSelectors';
 import { createMeme, fetchUserMemes } from '../actions/memeActions';
+import { sessionSignOut } from '../actions/sessionActions';
 
 
 
-function MemeContainer({ memes, handleSubmit, loadMemes }) {
+function MemeContainer({ memes, handleSubmit, loadMemes, signOut }) {
   
   useEffect(()=> {
     loadMemes();
@@ -16,6 +17,7 @@ function MemeContainer({ memes, handleSubmit, loadMemes }) {
 
   return (
     <>
+      <button onClick={() => signOut()}>Sign Out</button>
       <MemeForm handleSubmit={handleSubmit} />
       <Memes memes={memes} />
     </>
@@ -34,6 +36,9 @@ const mapDispatchToProps = dispatch => ({
   },
   loadMemes() {
     dispatch(fetchUserMemes());
+  },
+  signOut() {
+    dispatch(sessionSignOut());
   }
 });
 
@@ -52,6 +57,7 @@ MemeContainer.propTypes = {
   })).isRequired,
   handleSubmit: PropTypes.func.isRequired,
   loadMemes: PropTypes.func.isRequired,
+  signOut: PropTypes.func.isRequired
 };
 
 

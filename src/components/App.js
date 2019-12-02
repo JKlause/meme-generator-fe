@@ -9,19 +9,21 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getSessionId, getSessionLoading } from '../selectors/sessionSelectors';
 import { sessionVerify } from '../actions/sessionActions';
 import Signup from '../containers/SignUp';
-import Signin from '../containers/SignIn';
+import SignIn from '../containers/SignIn';
 import MemeContainer from '../containers/MemeContainer';
+import MemeDetail from './meme/MemeDetail';
 
 const PrivateRoute = ({ ...rest }) => {
   const sessionId = useSelector(getSessionId);
   const loading = useSelector(getSessionLoading);
   const dispatch = useDispatch();
-
+  
   useEffect(()=> {
     if(!sessionId) dispatch(sessionVerify());
   }, []);
-
+  
   if(loading) return <h1>Loading...</h1>;
+
 
   if(!loading && !sessionId) return <Redirect to="/signup"/>;
 
@@ -33,7 +35,8 @@ export default function App() {
     <Router>
       <Switch>
         <PrivateRoute exact path="/" component={MemeContainer}/>
-        <PrivateRoute path="/signin" component={Signin}/>
+        <PrivateRoute path="/meme/:id" component={MemeDetail}/>
+        <Route path="/signin" component={SignIn}/>
         <Route path="/signup" component={Signup}/>
       </Switch>
     </Router>

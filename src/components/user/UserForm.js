@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import {getSessionId} from '../../selectors/sessionSelectors';
+import { getSessionId } from '../../selectors/sessionSelectors';
 
 const UserForm = ({ buttonText, handleSubmit, redirectText, redirectLink }) => {
   const [username, setUsername] = useState('');

@@ -1,4 +1,4 @@
-import { postMeme, getAllMemes } from '../services/meme';
+import { postMeme, getAllMemes, getMemeById } from '../services/meme';
 
 export const CREATE_MEME = 'CREATE_MEME';
 export const createMeme = meme => dispatch => {
@@ -18,6 +18,18 @@ export const fetchUserMemes = () => dispatch => {
       dispatch({
         type: SET_MEMES,
         payload: memes
+      });
+    });
+};
+
+export const SET_DETAIL_MEME = 'SET_DETAIL_MEME';
+export const fetchDetailMeme = id => dispatch => {
+  getMemeById(id)
+    .then(meme => {
+
+      dispatch({
+        type: SET_DETAIL_MEME,
+        payload: meme
       });
     });
 };

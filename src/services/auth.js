@@ -5,7 +5,9 @@ const AUTH_URL = 'http://localhost:7891/api/v1/auth';
 export const signup = (username, password) => post(`${AUTH_URL}/signup`, 
   { username, password });
 
-export const signin = (username, password) => post(`${AUTH_URL}/signin`,
+export const signIn = (username, password) => post(`${AUTH_URL}/signin`,
   { username, password });
+
+export const signOut = () => get(`${AUTH_URL}/signout`);
 
 export const verifySession = () => get(`${AUTH_URL}/verify`);

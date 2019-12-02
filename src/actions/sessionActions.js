@@ -1,8 +1,9 @@
-import { signup, signin, verifySession } from '../services/auth';
+import { signup, signIn, signOut, verifySession } from '../services/auth';
 
 export const SET_SESSION = 'SET_SESSION';
 export const SET_SESSION_LOADING = 'SET_SESSION_LOADING';
 export const SET_SESSION_ERROR = 'SET_SESSION_ERROR';
+export const SET_SESSION_SIGN_OUT = 'SET_SESSION_SIGN_OUT';
 
 export const sessionSignup = (username, password) => dispatch => {
   dispatch({
@@ -18,15 +19,27 @@ export const sessionSignup = (username, password) => dispatch => {
     });
 };
 
-export const sessionSignin = (username, password) => dispatch => {
+export const sessionSignIn = (username, password) => dispatch => {
   dispatch({
     type: SET_SESSION_LOADING
   });
-  return signin(username, password)
+  return signIn(username, password)
     .then(user => {
       dispatch({
         type: SET_SESSION,
         payload: user
+      });
+    });
+};
+
+export const sessionSignOut = () => dispatch => {
+  dispatch({
+    type: SET_SESSION_LOADING
+  });
+  return signOut()
+    .then(() => {
+      dispatch({
+        type: SET_SESSION_SIGN_OUT
       });
     });
 };

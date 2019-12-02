@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Meme from './Meme';
 import styles from './Memes.css';
+import { Link } from 'react-router-dom';
 
 export default function Memes({ memes }) {
   const memeElements = memes.map(meme => {
@@ -11,7 +12,11 @@ export default function Memes({ memes }) {
       imageUrl: meme.imageUrl,
       id: meme._id
     };
-    return <Meme key={meme._id} meme={memeData} />;
+    return (
+      <Link to={`/meme/${meme._id}`} key={meme._id}>
+        <Meme  meme={memeData} />
+      </Link>
+    );
   });
 
   return (
